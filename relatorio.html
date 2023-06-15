@@ -30,34 +30,48 @@ var context = canvas.getContext('2d');
 // Variável para controlar se o usuário está desenhando
 var isDrawing = false;
 
+// Obter as coordenadas corretas do toque no canvas
+function getTouchPos(canvasDom, touchEvent) {
+  var rect = canvasDom.getBoundingClientRect();
+  return {
+    x: touchEvent.touches[0].clientX - rect.left,
+    y: touchEvent.touches[0].clientY - rect.top
+  };
+}
+
 // Configurando eventos de mouse ou toque no canvas
 canvas.addEventListener('mousedown', startDrawing);
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseup', stopDrawing);
-canvas.addEventListener('touchstart', startDrawing);
-canvas.addEventListener('touchmove', draw);
+canvas.addEventListener('touchstart', function (e) {
+  var touchPos = getTouchPos(canvas, e);
+  startDrawing(touchPos);
+});
+canvas.addEventListener('touchmove', function (e) {
+  var touchPos = getTouchPos(canvas, e);
+  draw(touchPos);
+});
 canvas.addEventListener('touchend', stopDrawing);
 
 // Função para iniciar o desenho
-function startDrawing(e) {
+function startDrawing(pos) {
   isDrawing = true;
   context.beginPath();
-  context.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-  e.preventDefault();
+  context.moveTo(pos.x, pos.y);
 }
 
 // Função para desenhar na tela enquanto o usuário arrasta o mouse ou o dedo
-function draw(e) {
+function draw(pos) {
   if (!isDrawing) return;
-  context.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+  context.lineTo(pos.x, pos.y);
   context.stroke();
-  e.preventDefault();
 }
 
 // Função para parar o desenho
 function stopDrawing() {
   isDrawing = false;
 }
+
 
 function saveSignature() {
   var fullName = document.getElementById('fullNameInput').value;
@@ -107,7 +121,6 @@ function saveSignature() {
   doc.setLineWidth(0.5);
   doc.line(10, 275, 100, 275);
 
-
   // Assinatura
   doc.text("Assinatura do cliente", 30, 280);
   var imgData = canvas.toDataURL('image/png');
@@ -117,7 +130,7 @@ function saveSignature() {
   doc.setLineWidth(1);
   doc.rect(5, 5, doc.internal.pageSize.getWidth() - 10, doc.internal.pageSize.getHeight() - 10);
 
-  doc.save('nota_venda.pdf');
+  doc.save('relatorio_de_visita_' + fullName +'.pdf');
 }
 
 // Função para gerar o PDF com o nome e a assinatura
