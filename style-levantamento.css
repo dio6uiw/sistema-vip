@@ -1,0 +1,119 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    height: 40px;
+    align-items: center;
+    background-color: white;
+}
+
+header h1{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+}
+
+main{
+    background-color: rgb(110, 110, 110);
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding: 30px;
+}
+
+main .info_setor input{
+    width: 95%;
+    height: 30px;
+    border: 0px;
+    margin-top: 15px;
+    font-size: 15px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+textarea{
+    width: 95%;
+    height: 200px;
+    border: 0px;
+    margin-top: 15px;
+    font-size: 15px;
+    padding-top: 05px;
+    padding-left: 10px;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.riscos_funcao label{
+    font-size: 15px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.riscos_funcao input{
+    color: rgb(0, 0, 0);
+}
+
+button{
+    width: 95%;
+    height: 40px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.adccampo{
+    background-color: rgb(110, 110, 110);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+.adccampo button{
+    width: 350px;
+    height: 40px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.adccampo #gerador{
+    width: 350px;
+    height: 40px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+    margin-top: 50px;
+    font-weight: bold;
+}
+
+#campos input{
+    width: 340px;
+    height: 30px;
+    border: 0px;
+    margin-top: 15px;
+    font-size: 15px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.inpteste{
+    width: 340px;
+    height: 25px;
+    border: 0px;
+    font-size: 15px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+#obsriscos{
+    height: 70px;
+}

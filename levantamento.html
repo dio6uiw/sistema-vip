@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levantamento de risco | VIP Preventiva</title>
+    <link rel="icon" href="logo.png"/>
+    <link rel="stylesheet" href="style-levantamento.css">
+    <script src="gerarRelatorio1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1><b>LEVANTAMENTO DE RISCOS</b></h1>
+    </header>
+    <main>
+        <form>
+            <div class="info_setor">
+                <input type="text" id="empresa" name="empresa" placeholder="Nome da empresa">
+                <br>
+                <input type="text" id="setor" name="setor" placeholder="Nome do setor">
+                <br>
+                <input type="number" id="cumprimento" name="cumprimento" placeholder="Comprimento do setor">
+                <br>
+                <input type="number" id="largura" name="largura" placeholder="Largura do setor">
+                <br>
+                <input type="number" id="pé_direito" name="pé_direito" placeholder="Pé direito do setor">
+                <br>
+                <input type="text" id="piso" name="piso" placeholder="Piso do setor">
+                <br>
+                <input type="text" id="estrutura" name="estrutura" placeholder="Estrutura do setor">
+                <br>
+                <input type="text" id="forro" name="forro" placeholder="Forro do setor">
+                <br>
+                <input type="text" id="iluminação_natural" name="iluminação_natural" placeholder="Iluminação natural">
+                <br>
+                <input type="text" id="iluminação_artificial" name="iluminação_artificial" placeholder="Iluminação artificial">
+                <br>
+                <input type="text" id="ventilador_natural" name="ventilador_natural" placeholder="Ventilação natural">
+                <br>
+                <input type="text" id="ventilador_artificial" name="ventilador_artificial" placeholder="Ventilação artificial">
+                <br>
+                <textarea name="myTextarea" id="myTextarea" cols="40" rows="10" placeholder="Máquinas e equipamentos do setor:"></textarea><br><br>
+                <br>
+                </div>
+            
+            <div class="riscos_funcao">
+                <label><b>Exposição ruído:</b></label><br><br>
+                <input type="radio" name="ruido" value="ruidosim" > <label>Sim</label>
+                <input type="radio" name="ruido" value="ruidonao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoR" value="Habitual Permanente" > <label>Habitual Permanente</label><br>
+                <input type="radio" name="exposicaoR" value="Habitual Intermitente" > <label>Habitual intermitente</label><br>
+                <input type="radio" name="exposicaoR" value="Ocasional" > <label>Ocasional</label><br>
+                <input type="radio" style="display: none" name="exposicaoR" value="Não exposto" checked><br>
+                <input class="inpteste" id="fonteRuido" name="fonteRuido" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Exposição radiação não ionizante:</b></label><br><br>
+                <input type="radio" name="radiacaonaoion" value="radiacaoNaoIonsim"> <label>Sim</label>
+                <input type="radio" name="radiacaonaoion" value="radiacaoNaoIonnao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoRadNaoIon" value="Habitual Permanente" > <label>Habitual Permanente</label><br>
+                <input type="radio" name="exposicaoRadNaoIon" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoRadNaoIon" value="Ocasional" > <label>Ocasional</label><br>
+                <input type="radio" style="display: none" name="exposicaoRadNaoIon" value="Não exposto" checked><br>
+                <input class="inpteste" id="fonteRadiacaoNaoIon" name="fonteRadiacaoNaoIon" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Exposição radiação ionizante:</b></label><br><br>
+                <input type="radio" name="radion" value="radionsim" > <label>Sim</label>
+                <input type="radio" name="radion" value="radionnao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoRI" value="Habitual Permanente" > <label>Habitual Permanente</label><br>
+                <input type="radio" name="exposicaoRI" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoRI" value="Ocasional" > <label>Ocasional</label><br>
+                <input type="radio" style="display: none" name="exposicaoRI" value="Não exposto" checked><br>
+                <input class="inpteste" id="fonteRadIon" name="fonteRadIon" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Exposição vibração:</b></label><br><br>
+                <input type="radio" name="vibracao" value="vibracaosim" > <label>Sim</label>
+                <input type="radio" name="vibracao" value="vibracaonao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoV" value="Habitual Permanente" > <label>Habitual Permanente</label><br>
+                <input type="radio" name="exposicaoV" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoV" value="Ocasional" > <label>Ocasional</label><br>
+                <input type="radio" style="display: none" name="exposicaoV" value="Não exposto" checked><br>
+                <input class="inpteste" id="fonteVibracao" name="fonteVibracao" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Exposição ao frio:</b></label><br><br>
+                <input type="radio" name="frio" value="friosim" > <label>Sim</label>
+                <input type="radio" name="frio" value="frionao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoF" value="Habitual Permanente" > <label>Habitual Permanente</label><br>
+                <input type="radio" name="exposicaoF" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoF" value="Ocasional" > <label>Ocasional</label><br>
+                <input type="radio" style="display: none" name="exposicaoF" value="Não exposto" checked><br>
+                <input class="inpteste" id="fonteFrio" name="fonteFrio" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Calor:</b></label><br><br>
+                <input type="radio" name="calor" value="calorsim" > <label>Sim</label>
+                <input type="radio" name="calor" value="calornao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoC" value="Habitual Permanente" > <label>Habitual Permanente</label><br>
+                <input type="radio" name="exposicaoC" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoC" value="Ocasional" > <label>Ocasional</label><br>
+                <input type="radio" style="display: none" name="exposicaoC" value="Não exposto" checked><br>
+                <input class="inpteste" id="fonteCalor" name="fonteCalor" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Umidade:</b></label><br><br>
+                <input type="radio" name="umidade" value="umidadesim" > <label>Sim</label>
+                <input type="radio" name="umidade" value="umidadenao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoU" value="Habitual Permanente" > <label>Habitual Permanente</label><br>
+                <input type="radio" name="exposicaoU" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoU" value="Ocasional" > <label>Ocasional</label><br>
+                <input type="radio" style="display: none" name="exposicaoU" value="Não exposto" checked><br>
+                <input class="inpteste" id="fonteUmidade" name="fonteUmidade" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Poeira:</b></label><br><br>
+                <input type="radio" name="poeira" value="poeirasim" > <label>Sim</label>
+                <input type="radio" name="poeira" value="poeiranao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoP" value="Habitual Permanente" > <label>Habitual Permanente</label><br>
+                <input type="radio" name="exposicaoP" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoP" value="Ocasional" > <label>Ocasional</label><br>
+                <input type="radio" style="display: none" name="exposicaoP" value="Não exposto" checked><br>
+                <input class="inpteste" id="fontePoeira" name="fontePoeira" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Fumos:</b></label><br><br>
+                <input type="radio" name="fumos" value="fumossim" > <label>Sim</label>
+                <input type="radio" name="fumos" value="fumosnao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoFumos" value="Habitual Permanente" > <label>Habitual Permanente</label><br>
+                <input type="radio" name="exposicaoFumos" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoFumos" value="Ocasional" > <label>Ocasional</label><br><br>
+                <input type="radio" style="display: none" name="exposicaoFumos" value="Não exposto" checked><br>
+                <input class="inpteste" id="fonteFumos" name="fonteFumos" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Gases:</b></label><br><br>
+                <input type="radio" name="gases" value="gasessim" > <label>Sim</label>
+                <input type="radio" name="gases" value="gasesnao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoG" value="Habitual Permanente" > <label>Habitual Permanente</label> <br>
+                <input type="radio" name="exposicaoG" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoG" value="Ocasional" > <label>Ocasional</label><br><br>
+                <input type="radio" style="display: none" name="exposicaoG" value="Não exposto" checked><br>
+                <input class="inpteste" id="fonteGases" name="fonteGases" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Biológico:</b></label><br><br>
+                <input type="radio" name="biologico" value="biologicosim" > <label>Sim</label>
+                <input type="radio" name="biologico" value="biologiconao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoB" value="Habitual Permanente" > <label>Habitual Permanente</label> <br>
+                <input type="radio" name="exposicaoB" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoB" value="Ocasional" > <label>Ocasional</label><br><br>
+                <input type="radio" name="exposicaoB" style="display: none" value="Não exposto" checked><br>
+                <input class="inpteste" id="fonteBiologico" name="fonteBiologico" placeholder="Fonte geradora"><br><br>
+                <hr><br>
+                <label><b>Levantamento e transporte manual de peso:</b></label><br><br>
+                <input type="radio" name="transportedepeso" value="transportedepesosim" > <label>Sim</label>
+                <input type="radio" name="transportedepeso" value="transportedepesonao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoLET" value="Habitual Permanente" > <label>Habitual Permanente</label> <br>
+                <input type="radio" name="exposicaoLET" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoLET" value="Ocasional" > <label>Ocasional</label><br><br>
+                <input type="radio" style="display: none" name="exposicaoLET" value="Não exposto" checked><br>
+                <input class="inpteste" id="fontetransportedepeso" name="fontetransportedepeso" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Eletricidade:</b></label><br><br>
+                <input type="radio" name="eletricidade" value="eletricidadesim" > <label>Sim</label>
+                <input type="radio" name="eletricidade" value="eletricidadenao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoeletricidade" value="Habitual Permanente" > <label>Habitual Permanente</label><br>
+                <input type="radio" name="exposicaoeletricidade" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoeletricidade" value="Ocasional" > <label>Ocasional</label><br><br>
+                <input type="radio" style="display: none" name="exposicaoeletricidade" value="Não exposto" checked><br>
+                <input class="inpteste" id="fonteletricidade" name="fonteletricidade" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Incêndio ou explosão:</b></label><br><br>
+                <input type="radio" name="incendio" value="incendiosim" > <label>Sim</label>
+                <input type="radio" name="incendio" value="incendionao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoincendio" value="Habitual Permanente" > <label>Habitual Permanente</label> <br>
+                <input type="radio" name="exposicaoincendio" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoincendio" value="Ocasional" > <label>Ocasional</label><br><br>
+                <input type="radio" style="display: none" name="exposicaoincendio" value="Não exposto" checked><br>
+                <input class="inpteste" id="fonteincendio" name="fonteincendio" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Queda de materiais:</b></label><br><br>
+                <input type="radio" name="queda" value="quedasim" > <label>Sim</label>
+                <input type="radio" name="queda" value="quedanao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoqueda" value="Habitual Permanente" > <label>Habitual Permanente</label><br>
+                <input type="radio" name="exposicaoqueda" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoqueda" value="Ocasional" > <label>Ocasional</label><br><br>
+                <input type="radio" style="display: none" name="exposicaoqueda" value="Não exposto" checked><br>
+                <input class="inpteste" id="fontequeda" name="fontequeda" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <label><b>Trabalho em altura:</b></label><br><br>
+                <input type="radio" name="altura" value="alturasim" > <label>Sim</label>
+                <input type="radio" name="altura" value="alturanao" checked> <label>Não</label><br><br>
+                <input type="radio" name="exposicaoaltura" value="Habitual Permanente" > <label>Habitual Permanente</label><br>
+                <input type="radio" name="exposicaoaltura" value="Habitual Intermitente" > <label>Habitual Intermitente</label><br>
+                <input type="radio" name="exposicaoaltura" value="Ocasional" > <label>Ocasional</label><br><br>
+                <input type="radio" style="display: none" name="exposicaoaltura" value="Não exposto" checked><br>
+                <input class="inpteste" id="fontealtura" name="fontealtura" placeholder="Fonte geradora"></input><br><br>
+                <hr><br>
+                <textarea name="obsriscos" id="obsriscos" cols="10" rows="50" placeholder="Observações sobre riscos:"></textarea><br><br>
+                <hr><br>
+                <label><b>Existe controle de EPI?</b></label>
+                <input type="radio" name="controleEPI" value="controlesim" > <label>Sim</label>
+                <input type="radio" name="controleEPI" value="controlenao" checked> <label>Não</label><br><br>
+                <hr><br>
+                <label><b>Existe rota de fuga?</b></label>
+                <input type="radio" name="rotadefuga" value="rotadefugasim" > <label>Sim</label>
+                <input type="radio" name="rotadefuga" value="rotadefuganao" checked> <label>Não</label><br><br>
+                <hr><br>
+                <label><b>Existe sinalização de emergência?</b></label>
+                <input type="radio" name="iluminacaoemerg" value="iluminacaoemergsim" > <label>Sim</label>
+                <input type="radio" name="iluminacaoemerg" value="iluminacaoemergnao" checked> <label>Não</label><br><br>
+                <hr><br>
+                <label><b>Existe extintores?</b></label>
+                <input type="radio" name="extintores" value="extintoressim" > <label>Sim</label>
+                <input type="radio" name="extintores" value="extintoresnao" checked> <label>Não</label><br><br>
+                <input class="inpteste" id="tipoextintor" name="tipoextintor" placeholder="Tipo do extintor"></input><br><br>
+                <hr><br>
+                <label><b>Medidas a serem adequadas:</b></label><br><br>
+                <input class="inpteste" id="tipoplacasinalizacao" name="tipoplacasinalizacao" placeholder="Adequação necessária"></input><br><br>
+            </div>          
+        </form>
+        <script>
+            var contadorCampos = 1;
+
+            function adicionarCampo() {
+
+                // Cria elementos HTML para o novo campo
+                var novoCampo = document.createElement("div2");
+                novoCampo.innerHTML = `
+                <br>
+                    <input type="text" name="nome${contadorCampos}" id="nome${contadorCampos}" placeholder="Nome da função"><br>
+                    <input type="text" name="atividade${contadorCampos}" id="atividade${contadorCampos}" placeholder="Atividade"><br>
+                    <input type="number" name="qtd${contadorCampos}" id="qtd${contadorCampos}" placeholder="Quantidade de funcionarios"><br>
+                <br>
+                `;
+
+                // Adiciona o novo campo à div de campos
+                var divCampos = document.getElementById("campos");
+                divCampos.appendChild(novoCampo);
+
+                // Atualiza o contador de campos
+                contadorCampos++;
+            }
+        </script>
+    </main>
+    <div class="adccampo">
+        <button onclick="adicionarCampo()">Adicionar atividade</button>
+        <div id="campos"></div>
+        <center><button id="gerador" onclick="gerarPDF()">Gerar relatório</button></center>      
+    </div>
+</body>
+</html>

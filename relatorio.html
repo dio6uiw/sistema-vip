@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Assinatura Digital Manuscrita</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+  <link rel="stylesheet" href="style-relatorio.css">
+</head>
+<body>
+  <h2>Relatório de visita técnica</h2>
+  <input type="text" id="fullNameInput" placeholder="Empresa"><br>
+  <input type="date" id="data" placeholder="Data"><br>
+  <select name="motivo" id="motivo">
+    <option value="selecione">Selecione o motivo da visita</option>
+    <option value="visita">Visita técnica</option>
+    <option value="curso">Curso</option>
+    <option value="exame">Exame médico</option>
+    <option value="levantamento">Levantamento de dados</option>
+    <option value="inspeção">Inspeção</option>
+  </select><br>
+  <textarea name="anotacoes" id="anotacoes" cols="30" rows="10" placeholder="Observações"></textarea><br>
+  <canvas id="signatureCanvas"></canvas><br><br>
+  <hr style="margin-top: -50px;">
+  <p>Assinatura do representante da empresa</p>
+  <button onclick="saveSignature()">Gerar relatório</button>
+  <script>
+    // Capturando o canvas e configurando o contexto de desenho
+var canvas = document.getElementById('signatureCanvas');
+var context = canvas.getContext('2d');
+
+// Variável para controlar se o usuário está desenhando
+var isDrawing = false;
+
+// Configurando eventos de mouse ou toque no canvas
+canvas.addEventListener('mousedown', startDrawing);
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', stopDrawing);
+canvas.addEventListener('touchstart', startDrawing);
+canvas.addEventListener('touchmove', draw);
+canvas.addEventListener('touchend', stopDrawing);
+
+// Função para iniciar o desenho
+function startDrawing(e) {
+  isDrawing = true;
+  context.beginPath();
+  context.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+  e.preventDefault();
+}
+
+// Função para desenhar na tela enquanto o usuário arrasta o mouse ou o dedo
+function draw(e) {
+  if (!isDrawing) return;
+  context.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+  context.stroke();
+  e.preventDefault();
+}
+
+// Função para parar o desenho
+function stopDrawing() {
+  isDrawing = false;
+}
+
+function saveSignature() {
+  var fullName = document.getElementById('fullNameInput').value;
+  var data = document.getElementById('data').value;
+  var motivo = document.getElementById('motivo').value;
+  var anotacoes = document.getElementById('anotacoes').value;
+
+  var endereco = "Rua Francisco Gomes, 395 - Mococa - SP";
+  var cnpj = "04.033.013/0001-18";
+  var logo = new Image();
+  logo.src = "logo.png";
+
+  var doc = new jsPDF();
+  doc.setFontSize(12);
+  doc.setTextColor(0, 0, 0);
+
+  // Logo da empresa
+  doc.addImage(logo, 'PNG', 0, 0, 50, 50);
+
+  // Informações da empresa
+  doc.text("VIP PREVENTIVA GESTAO EM SEGURANCA DO TRABALHO", 50, 20);
+  doc.text(endereco, 50, 30);
+  doc.text(cnpj, 50, 40);
+
+  // Título da nota de venda
+  doc.setFontSize(18);
+  doc.text("Relatório de visita técnica", 10, 60);
+
+  // Linha horizontal
+  doc.setLineWidth(0.5);
+  doc.line(10, 65, 200, 65);
+
+  // Informações do cliente
+  doc.setFontSize(12);
+  doc.text(`Empresa: ${fullName}`, 10, 75);
+  doc.text(`Data: ${data}`, 10, 85);
+  doc.text(`Motivo: ${motivo}`, 10, 95);
+
+  // Descrição da venda
+  doc.setFontSize(14);
+  doc.text("Observações:", 10, 115);
+  doc.setFontSize(12);
+  var splitText = doc.splitTextToSize(anotacoes, 180); // Dividindo o texto em várias linhas
+  doc.text(splitText, 10, 125);
+
+  // Linha horizontal
+  doc.setLineWidth(0.5);
+  doc.line(10, 275, 100, 275);
+
+
+  // Assinatura
+  doc.text("Assinatura do cliente", 30, 280);
+  var imgData = canvas.toDataURL('image/png');
+  doc.addImage(imgData, 'PNG', 10, 230, 100, 50);
+
+  // Borda
+  doc.setLineWidth(1);
+  doc.rect(5, 5, doc.internal.pageSize.getWidth() - 10, doc.internal.pageSize.getHeight() - 10);
+
+  doc.save('nota_venda.pdf');
+}
+
+// Função para gerar o PDF com o nome e a assinatura
+function generatePDF() {
+  var fullName = document.getElementById('fullNameInput').value;
+
+  var doc = new jsPDF();
+  doc.setFontSize(12);
+  doc.text(`Nome: ${fullName}`, 10, 10);
+
+  var imgData = canvas.toDataURL('image/png');
+  doc.addImage(imgData, 'PNG', 10, 20, 100, 50);
+
+  // Renderizando o PDF no iframe para visualização
+  var iframe = document.createElement('iframe');
+  iframe.setAttribute('style', 'position:absolute;right:0; top:0; bottom:0; height:100%; width:500px');
+  document.body.appendChild(iframe);
+  iframe.src = doc.output('datauristring');
+}
+  </script>
+</body>
+</html>
